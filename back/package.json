@@ -1,0 +1,27 @@
+{
+  "name": "back",
+  "version": "1.0.0",
+  "description": "CodeMarks App",
+  "main": "index.js",
+  "scripts": {
+    "lint": "npx eslint --fix",
+    "start": "npx nodemon app",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sandy Prolhac",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^6.0.1",
+    "lint-staged": "^9.2.0",
+    "nodemon": "^1.19.1"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "lint-staged": {
+    "**/*.js": [
+      "npx eslint --fix",
+      "git add"
+    ]
+  }
+}
