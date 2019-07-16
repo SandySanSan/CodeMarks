@@ -1,5 +1,6 @@
 const express = require('express');
 const db = require('../connection');
+const _ = require('lodash');
 
 const router = express.Router();
 
@@ -33,15 +34,26 @@ router.post('/', async (req, res) => {
 
 router.get('/', (req, res) => {
   db.query('SELECT *, tagName FROM content JOIN contentHasTag ON contentHasTag.contentId = content.idcontent JOIN tag ON idtag = tagId', (err, results) => {
+
+    const dedup = (items) => items.reduce((carry, current) => {
+      const existing = carry.find(item => item.idcontent === current.idcontent);
+      if (!existing) {
+        current.tagsNames = [current.tagName]
+        return carry.concat(current);
+      }
+      existing.tagsNames = existing.tagsNames.concat(current.tagName)
+      return carry
+    }, []);
+
+    const dedupContent = dedup(results);
     if (err) {
       return res.status(500).json({
         error: err.message,
         sql: err.sql
       });
     }
-    return res.status(200).json({
-      results
-    });
+    return res.status(200).json(dedupContent);
+
   });
 });
 

@@ -1,9 +1,11 @@
 
 import React from 'react';
 import ReactTinyLink from 'react-tiny-link';
-import { Card, Icon, Grid } from 'semantic-ui-react';
+import {
+  Card, Icon, Grid, Label
+} from 'semantic-ui-react';
 
-const CardContent = ({ link }) => (
+const CardContent = ({ link, tags }) => (
   <div>
     <Card
       fluid
@@ -17,6 +19,13 @@ const CardContent = ({ link }) => (
           minLine={1}
           url={link}
         />
+      </Card.Content>
+      <Card.Content>
+        {tags.map(tag => (
+          <Label size="mini">
+            {tag}
+          </Label>
+        ))}
       </Card.Content>
       <Card.Content extra>
         <Grid>

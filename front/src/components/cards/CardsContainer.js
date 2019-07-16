@@ -15,7 +15,7 @@ class CardsContainer extends Component {
 
   componentDidMount() {
     axios.get('/api/content')
-      .then(resp => this.setState({ content: resp.data.results }));
+      .then(resp => this.setState({ content: resp.data }));
   }
 
   render() {
@@ -30,7 +30,7 @@ class CardsContainer extends Component {
                   <CardContent
                     key={`${c.title}-${c.idcontent}`}
                     link={c.link}
-                    tags
+                    tags={c.tagsNames}
                   />
                 </Grid.Column>
               ))}
