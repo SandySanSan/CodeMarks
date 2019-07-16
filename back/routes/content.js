@@ -11,9 +11,7 @@ router.post('/', async (req, res) => {
   try {
     const status = await db.queryAsync('INSERT INTO content SET ?', contentData);
     const results = await db.queryAsync('SELECT idcontent FROM content WHERE idcontent = ?', status.insertId);
-    console.log(status)
     const contentSelectId = results[0].idcontent;
-
     const tagsValues = tags.map(tag => [contentSelectId, tag]);
 
     const [tagValues] = await Promise.all([
@@ -43,6 +41,20 @@ router.get('/', (req, res) => {
     }
     return res.sendStatus(200);
 
+  });
+});
+
+router.delete('/:id', (req, res) => {
+  const contentId = req.params.id;
+
+  db.query('DELETE FROM content WHERE idcontent = ?', [contentId], (err, results) => {
+    if (err) {
+      return res.status(500).json({
+        error: err.message,
+        sql: err.sql
+      });
+    }
+    return res.json(results);
   });
 });
 
