@@ -31,6 +31,7 @@ class CardsContainer extends Component {
                   <CardContent
                     key={`${c.title}-${c.idcontent}`}
                     link={c.link}
+                    tags
                   />
                 </Grid.Column>
               ))}
