@@ -32,7 +32,7 @@ router.post('/', async (req, res) => {
 
 
 router.get('/', (req, res) => {
-  db.query('SELECT * FROM content', (err) => {
+  db.query('SELECT *, tagName FROM content JOIN contentHasTag ON contentHasTag.contentId = content.idcontent JOIN tag ON idtag = tagId', (err) => {
     if (err) {
       return res.status(500).json({
         error: err.message,
