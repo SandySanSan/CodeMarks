@@ -32,15 +32,16 @@ router.post('/', async (req, res) => {
 
 
 router.get('/', (req, res) => {
-  db.query('SELECT * FROM content', (err) => {
+  db.query('SELECT * FROM content', (err, results) => {
     if (err) {
       return res.status(500).json({
         error: err.message,
         sql: err.sql
       });
     }
-    return res.sendStatus(200);
-
+    return res.status(200).json({
+      results
+    });
   });
 });
 
