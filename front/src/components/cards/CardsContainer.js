@@ -20,7 +20,6 @@ class CardsContainer extends Component {
 
   render() {
     const { content } = this.state;
-    console.log(content);
     return (
       <Fragment>
         <Container>
