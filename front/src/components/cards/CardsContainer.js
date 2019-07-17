@@ -18,6 +18,7 @@ class CardsContainer extends Component {
       .then(resp => this.setState({ content: resp.data }));
   }
 
+
   render() {
     const { content } = this.state;
     return (
@@ -32,6 +33,7 @@ class CardsContainer extends Component {
                     link={c.link}
                     tags={c.tagsNames}
                     color={c.color}
+                    id={c.idcontent}
                   />
                 </Grid.Column>
               ))}
