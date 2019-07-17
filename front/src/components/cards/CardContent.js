@@ -14,7 +14,7 @@ const CardContent = ({
     <div>
       <Card
         fluid
-        style={{ marginBottom: '20px' }}
+        style={{ marginBottom: '5px' }}
       >
         <Card.Content>
           <ReactTinyLink
