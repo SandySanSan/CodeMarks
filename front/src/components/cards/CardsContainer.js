@@ -31,6 +31,7 @@ class CardsContainer extends Component {
                     key={`${c.title}-${c.idcontent}`}
                     link={c.link}
                     tags={c.tagsNames}
+                    color={c.color}
                   />
                 </Grid.Column>
               ))}

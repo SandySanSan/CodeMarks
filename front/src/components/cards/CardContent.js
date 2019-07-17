@@ -5,8 +5,9 @@ import {
   Card, Icon, Grid, Label
 } from 'semantic-ui-react';
 
-const CardContent = ({ link, tags }) => (
+const CardContent = ({ link, tags, color }) => (
   <div>
+
     <Card
       fluid
       style={{ marginBottom: '20px' }}
@@ -19,10 +20,8 @@ const CardContent = ({ link, tags }) => (
           minLine={1}
           url={link}
         />
-      </Card.Content>
-      <Card.Content>
         {tags.map(tag => (
-          <Label size="mini">
+          <Label size="mini" color={color} key={`${tag}-${color}`}>
             {tag}
           </Label>
         ))}
