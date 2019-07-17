@@ -13,14 +13,16 @@ router.post('/', async (req, res) => {
     const status = await db.queryAsync('INSERT INTO content SET ?', contentData);
     const results = await db.queryAsync('SELECT idcontent FROM content WHERE idcontent = ?', status.insertId);
     const contentSelectId = results[0].idcontent;
-    const tagsValues = tags.map(tag => [contentSelectId, tag]);
+    if (tags) {
+      const tagsValues = tags.map(tag => [contentSelectId, tag]);
 
-    const [tagValues] = await Promise.all([
-      db.queryAsync('INSERT INTO contentHasTag (contentId,tagId) VALUES ?', [tagsValues])
-    ]);
-    res.status(200).json({
-      tagValues
-    });
+      const [tagValues] = await Promise.all([
+        db.queryAsync('INSERT INTO contentHasTag (contentId,tagId) VALUES ?', [tagsValues])
+      ]);
+      res.status(200).json({
+        tagValues
+      });
+    }
     return contentData;
   } catch (err) {
     return res.status(500).json({

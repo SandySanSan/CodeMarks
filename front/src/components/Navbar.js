@@ -32,7 +32,7 @@ export default class MenuExampleHeader extends Component {
           onClick={this.handleItemClick}
         />
         <Menu.Item position="right">
-          <Button inverted icon color="green" labelPosition="right">
+          <Button inverted icon color="green" labelPosition="right" href="/add-content">
             Ajouter un lien
             <Icon name="plus circle" />
           </Button>
