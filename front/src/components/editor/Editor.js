@@ -38,7 +38,7 @@ class EditorContainer extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{ height: '500px' }}>
         <Toolbar>
           {this.renderMarkButton('bold', 'format_bold')}
           {this.renderMarkButton('italic', 'format_italic')}

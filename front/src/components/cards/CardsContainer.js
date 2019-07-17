@@ -34,6 +34,7 @@ class CardsContainer extends Component {
                     tags={c.tagsNames}
                     color={c.color}
                     id={c.idcontent}
+                    title={c.title}
                   />
                 </Grid.Column>
               ))}

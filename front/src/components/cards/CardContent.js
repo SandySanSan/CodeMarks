@@ -8,7 +8,7 @@ import {
 } from 'semantic-ui-react';
 
 const CardContent = ({
-  link, id
+  link, id, title
   // tags, color
 }) => (
     <div>
@@ -34,7 +34,10 @@ const CardContent = ({
           <Button.Group basic size="small">
             <Link to={{
               pathname: '/editor',
-              id: { id }
+              id: { id },
+              title: { title },
+              link: { link }
+
             }}
             >
               <Button

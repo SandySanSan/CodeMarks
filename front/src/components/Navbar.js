@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Menu } from 'semantic-ui-react';
+import { Menu, Button, Icon } from 'semantic-ui-react';
 
 export default class MenuExampleHeader extends Component {
   constructor(props) {
@@ -18,11 +18,12 @@ export default class MenuExampleHeader extends Component {
 
     return (
       <Menu inverted>
-        <Menu.Item header>CodeMarks</Menu.Item>
+        <Menu.Item header href="/">CodeMarks</Menu.Item>
         <Menu.Item
           name="Articles"
           active={activeItem === 'Articles'}
           onClick={this.handleItemClick}
+
         />
         <Menu.Item name="Videos" active={activeItem === 'Videos'} onClick={this.handleItemClick} />
         <Menu.Item
@@ -30,6 +31,12 @@ export default class MenuExampleHeader extends Component {
           active={activeItem === 'Notes'}
           onClick={this.handleItemClick}
         />
+        <Menu.Item position="right">
+          <Button inverted icon color="green" labelPosition="right">
+            Ajouter un lien
+            <Icon name="plus circle" />
+          </Button>
+        </Menu.Item>
       </Menu>
     );
   }

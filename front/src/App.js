@@ -4,6 +4,7 @@ import NavBar from './components/Navbar';
 import './App.css';
 import CardsContainer from './components/cards/CardsContainer';
 import EditorContainer from './components/editor/EditorContainer';
+import FormAddContent from './components/form/FormAddContent';
 
 function App() {
   return (
@@ -12,6 +13,8 @@ function App() {
         <NavBar />
         <Route exact path="/" component={CardsContainer} />
         <Route exact path="/editor" component={EditorContainer} />
+        <Route exact path="/add-content" component={FormAddContent} />
+
       </div>
     </BrowserRouter>
   );
