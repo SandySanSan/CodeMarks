@@ -1,30 +1,17 @@
 import React, { Fragment } from 'react';
 import { Grid, Header, Icon, Container } from 'semantic-ui-react';
 import CardContent from './CardContent';
-import LatestContent from './LatestContent';
 
 const CardsContainer = ({ content }) => {
   const contentReact = content.filter(el => el.tagsNames.includes('React'));
   const contentJs = content.filter(el => el.tagsNames.includes('Javascript'));
-  console.log(contentReact)
+  console.log(contentJs.length)
   return (
     <Fragment>
       <Grid centered>
-        <Grid.Row>
-          <Grid.Column width={11} floated='left'>
-            <div style={{ margin: '40px' }}>
-              <Header as='h3' dividing>
-                Derniers ajouts
-              </Header>
-              <LatestContent
-                content={content}
-              />
-            </div>
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
+        <Grid.Row style={{ marginTop: '45px' }}>
           <Container text>
-            <Header as='h4' dividing>
+            <Header as='h3' dividing>
               <Icon name='react' color='teal' />
               React
               </Header>
@@ -45,7 +32,7 @@ const CardsContainer = ({ content }) => {
 
         <Grid.Row>
           <Container text>
-            <Header as='h4' dividing>
+            <Header as='h3' dividing>
               <Icon name='js square' color='yellow' />
               Javascript
               </Header>

@@ -27,7 +27,9 @@ class Home extends Component {
         <Grid relaxed>
           <Grid.Row>
             <Grid.Column width={4}>
-              <SideBar />
+              <SideBar
+                content={content}
+              />
 
             </Grid.Column>
             <Grid.Column width={12}>

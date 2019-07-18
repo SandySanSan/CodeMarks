@@ -16,6 +16,19 @@ router.post('/', (req, res) => {
   })
 })
 
+router.get('/', (req, res) => {
+  db.query('SELECT * FROM tag ORDER BY tagName ASC', (err, results) => {
+    if (err) {
+      return res.status(500).json({
+        error: err.message,
+        sql: err.sql
+      });
+    }
+    console.log(results)
+    return res.status(200).json(results);
+  })
+})
+
 
 
 module.exports = router;
