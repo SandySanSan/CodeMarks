@@ -31,7 +31,7 @@ const CardsContainer = ({ content }) => {
             <Header as="h3" dividing>
               <Icon name="react" color="teal" />
               React
-              </Header>
+            </Header>
           </Container>
         </Grid.Row>
         {contentReact.splice(0, 4).map(c => (
@@ -49,7 +49,7 @@ const CardsContainer = ({ content }) => {
             <Header as="h3" dividing>
               <Icon name="js square" color="yellow" />
               Javascript
-              </Header>
+            </Header>
           </Container>
         </Grid.Row>
         {contentJs.splice(0, 4).map(c => (
@@ -67,7 +67,7 @@ const CardsContainer = ({ content }) => {
         ))}
 
       </Grid>
-    </Fragment >
+    </Fragment>
   );
 };
 export default CardsContainer;
