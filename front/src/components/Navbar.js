@@ -18,7 +18,7 @@ export default class MenuExampleHeader extends Component {
 
     return (
       <Menu inverted>
-        <Menu.Item header>CodeMarks</Menu.Item>
+        <Menu.Item header style={{ color: 'limegreen' }}><Icon name="code" color='green' />CodeMarks</Menu.Item>
         <Menu.Item
           name="Accueil"
           active={activeItem === 'Accueil'}

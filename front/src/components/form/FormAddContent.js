@@ -80,7 +80,7 @@ class FormAddContent extends Component {
                 <Header as="h2" textAlign="center" style={{ padding: '20px' }}>
                   Ajouter un lien
               </Header>
-                <Form onSubmit={this.handleSubmit} inverted>
+                <Form onSubmit={this.handleSubmit} inverted style={{ padding: '25px' }}>
                   <Form.Input
                     fluid
                     label='Titre'
