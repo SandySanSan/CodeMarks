@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import axios from 'axios';
-import { Form, Container, Grid, Icon, Header, Segment } from 'semantic-ui-react'
+import { Form, Container, Grid, Icon, Header, Segment, Dropdown } from 'semantic-ui-react'
 
 
 class FormAddContent extends Component {
@@ -27,6 +27,10 @@ class FormAddContent extends Component {
     });
   }
 
+  toggleChange = (event, { value }) => {
+    this.setState({ type: value });
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
     const { link, title, type } = this.state;
@@ -48,18 +52,18 @@ class FormAddContent extends Component {
 
   }
   render() {
-    const { title, link, type, titleError, linkError, typeError } = this.state;
+    const { title, link, type, titleError, linkError } = this.state;
 
     return (
       <Fragment>
-        <Container>
+        <Container style={{ marginTop: '50px' }}>
           <Grid centered>
             <Grid.Column width={11}>
-              <Header as="h2" textAlign="center" style={{ paddingTop: '50px' }}>
-                Ajouter un lien
+              <Segment inverted>
+                <Header as="h2" textAlign="center" style={{ padding: '20px' }}>
+                  Ajouter un lien
               </Header>
-              <Segment>
-                <Form onSubmit={this.handleSubmit}>
+                <Form onSubmit={this.handleSubmit} inverted>
                   <Form.Input
                     fluid
                     label='Titre'
@@ -78,33 +82,30 @@ class FormAddContent extends Component {
                     onChange={this.handleChange}
                     error={linkError}
                   />
-
-                  <Form.Group grouped>
+                  <Form.Group inline>
                     <label>Type</label>
-                    <label>
-                      <input
-                        type="radio"
-                        name="type"
-                        label="Article"
-                        onChange={this.handleChange}
-                        value="article"
-                        checked={type === "article"}
-                        error={typeError}
+                    <Form.Radio
+                      label="Article"
+                      value="article"
+                      checked={type === 'article'}
+                      onChange={this.toggleChange}
+                    />
+                    <Form.Radio
+                      label="Vidéo"
+                      value="video"
+                      checked={type === 'video'}
+                      onChange={this.toggleChange}
+                    />
 
-                      />
-                      Article
-                    </label>
-                    <label>
-                      <input
-                        type="radio"
-                        name="type"
-                        onChange={this.handleChange}
-                        value="video"
-                        checked={type === "video"}
-                      />
-                      Video
-                    </label>
                   </Form.Group>
+                  <Dropdown
+                    placeholder='State'
+                    fluid
+                    multiple
+                    search
+                    selection
+                    options={stateOptions}
+                  />
                   <Form.Button
                   >Enregistrer
                   <Icon name='right arrow' />
