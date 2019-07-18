@@ -10,7 +10,7 @@ class SearchByTags extends Component {
     super(props);
     this.state = {
       searchTagContent: []
-    }
+    };
   }
 
 
@@ -25,7 +25,6 @@ class SearchByTags extends Component {
     const { content, searchTagContent } = this.state;
 
     return (
-
       <Fragment>
         <Grid relaxed>
           <Grid.Row>
@@ -33,7 +32,6 @@ class SearchByTags extends Component {
               <SideBar
                 content={content}
               />
-
             </Grid.Column>
             <Grid.Column width={12}>
               <Container>
@@ -46,8 +44,6 @@ class SearchByTags extends Component {
             </Grid.Column>
           </Grid.Row>
         </Grid>
-
-
       </Fragment>
     );
   }
