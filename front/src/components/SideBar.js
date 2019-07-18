@@ -10,7 +10,7 @@ export default class MenuExampleSubMenu extends Component {
     const { activeItem } = this.state
 
     return (
-      <Menu vertical fluid style={{ marginLeft: '30px', marginRight: '30px' }}>
+      <Menu vertical fluid style={{ marginLeft: '30px' }}>
         <Menu.Item>
           <Input placeholder='Search...' />
         </Menu.Item>

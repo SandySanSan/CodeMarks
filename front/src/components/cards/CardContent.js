@@ -40,13 +40,10 @@ const CardContent = ({
 
             }}
             >
-              <Button
-                icon="write"
-              />
+              <Button icon="write" />
             </Link>
             <Button icon="eye" />
             <Button icon="delete" />
-
           </Button.Group>
         </Card.Content>
       </Card>
