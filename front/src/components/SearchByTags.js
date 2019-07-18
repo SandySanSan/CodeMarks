@@ -2,26 +2,27 @@ import React, { Component, Fragment } from 'react';
 import { Container, Grid } from 'semantic-ui-react';
 import axios from 'axios';
 import SideBar from './SideBar';
-import CardsContainer from './cards/CardsContainer';
+import TagsContainer from './cards/CardsContainer';
 
 
-class Home extends Component {
-  signal = axios.CancelToken.source();
-
+class SearchByTags extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      content: []
+      searchTagContent: []
     }
   }
 
+
   componentDidMount() {
-    axios.get('/api/content')
-      .then(resp => this.setState({ content: resp.data }));
+    const { tag } = this.props.location.tag;
+    console.log(tag)
+    axios.get(`/api/tags/${tag}`)
+      .then(resp => this.setState({ searchTagContent: resp.data }));
   }
 
   render() {
-    const { content } = this.state;
+    const { content, searchTagContent } = this.state;
 
     return (
 
@@ -37,8 +38,8 @@ class Home extends Component {
             <Grid.Column width={12}>
               <Container>
                 <Grid centered>
-                  <CardsContainer
-                    content={content}
+                  <TagsContainer
+                    searchTagContent={searchTagContent}
                   />
                 </Grid>
               </Container>
@@ -52,4 +53,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default SearchByTags;

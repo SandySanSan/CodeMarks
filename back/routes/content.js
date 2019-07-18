@@ -7,7 +7,6 @@ const router = express.Router();
 router.post('/', async (req, res) => {
   const formData = req.body;
   const { tags, ...contentData } = formData;
-  console.log(formData)
 
   try {
     const status = await db.queryAsync('INSERT INTO content SET ?', contentData);
@@ -15,7 +14,6 @@ router.post('/', async (req, res) => {
     const contentSelectId = results[0].idcontent;
     if (tags) {
       const tagsValues = tags.map(tag => [contentSelectId, tag]);
-
       const [tagValues] = await Promise.all([
         db.queryAsync('INSERT INTO contentHasTag (contentId,tagId) VALUES ?', [tagsValues])
       ]);
@@ -42,7 +40,6 @@ router.get('/:id', (req, res) => {
         sql: err.sql
       });
     }
-    console.log(results)
     return res.status(200).json(results);
 
   });

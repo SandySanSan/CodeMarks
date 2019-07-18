@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { List, Header } from 'semantic-ui-react';
+import { List } from 'semantic-ui-react';
 import ListLatestContent from './ListLatestContent';
 
 
@@ -9,15 +9,13 @@ const LatestContent = ({ content }) => {
 
   return (
     <Fragment>
-      <Header as='h3' dividing>
-        Derniers ajouts
-    </Header>
-      <List divided>
+      <List divided relaxed>
         {lastest.map(el => (
           <ListLatestContent
+            key={`${el.idcontent}-${el.dateCreation}`}
             type={el.type}
             title={el.title}
-            id={el.id}
+            id={el.idcontent}
             link={el.link}
             dateCreation={el.dateCreation}
           />

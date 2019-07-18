@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Dropdown, Icon, Input, Menu, Button } from 'semantic-ui-react';
-import LatestContent from './cards/LatestContent';
+import { withRouter } from "react-router-dom";
 
-export default class SideBar extends Component {
+class SideBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,28 +16,36 @@ export default class SideBar extends Component {
       .then(resp => this.setState({ tags: resp.data }));
   }
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+
+  handleClick = (e) => {
+    const tag = e.target.value;
+    const { history } = this.props;
+    history.push(`/search-by-tags/${tag}`);
+  }
 
   render() {
     const { activeItem, tags } = this.state;
-    const { content } = this.props;
     return (
       <Menu vertical fluid style={{ marginLeft: '30px' }} secondary>
         <Menu.Item>
           <Input placeholder='Search...' />
         </Menu.Item>
         <Menu.Item>
-
-          <LatestContent
-            content={content}
-          />
-        </Menu.Item>
-        <Menu.Item>
           <Menu.Header>Tags</Menu.Header>
           <Menu.Menu>
             <Menu.Item>
               {tags.map(tag =>
-                <Button size='mini' basic color={tag.color} style={{ margin: '3px' }}>{tag.tagName}</Button>
+                <Button
+                  size='mini'
+                  basic color={tag.color}
+                  style={{ margin: '3px' }}
+                  key={`${tag.color}-${tag.idtag}`}
+                  value={tag.tagName}
+                  onClick={(e) => this.handleClick(e)}
+                >{tag.tagName}
+                </Button>
               )}
             </Menu.Item>
           </Menu.Menu>
@@ -66,3 +74,5 @@ export default class SideBar extends Component {
     )
   }
 }
+
+export default withRouter(SideBar);

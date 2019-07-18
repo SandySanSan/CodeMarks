@@ -37,7 +37,6 @@ const CardContent = ({
               id: { id },
               title: { title },
               link: { link }
-
             }}
             >
               <Button icon="write" />
