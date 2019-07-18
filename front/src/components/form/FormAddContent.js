@@ -7,6 +7,7 @@ class FormAddContent extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      tagsList: [],
       title: '',
       link: '',
       type: '',
@@ -41,7 +42,8 @@ class FormAddContent extends Component {
     const formData = {
       title: this.state.title,
       link: this.state.link,
-      type: this.state.type
+      type: this.state.type,
+      tags: this.state.tags
     };
     console.log(formData)
     axios.post('/api/content/', formData)
@@ -51,9 +53,24 @@ class FormAddContent extends Component {
       })
 
   }
-  render() {
-    const { title, link, type, titleError, linkError } = this.state;
 
+  handleChangeDropDown = (e, { name, value }) => this.setState({ [name]: value })
+
+
+  componentDidMount() {
+    axios.get('/api/tags')
+      .then(resp => this.setState({ tagsList: resp.data }));
+  }
+
+
+  render() {
+    const { title, link, type, titleError, linkError, tagsList } = this.state;
+    const tagsOptions = tagsList.map((tag, index) => ({
+      key: `${tag.tagName}-${index}`,
+      text: tag.tagName,
+      value: tag.idtag,
+      label: { color: tag.color, empty: true, circular: true }
+    }))
     return (
       <Fragment>
         <Container style={{ marginTop: '50px' }}>
@@ -98,15 +115,20 @@ class FormAddContent extends Component {
                     />
 
                   </Form.Group>
-                  <Dropdown
-                    placeholder='State'
-                    fluid
-                    multiple
-                    search
-                    selection
-                    options={stateOptions}
-                  />
-                  <Form.Button
+                  <Form.Group>
+                    <Dropdown
+                      placeholder='Tags'
+                      fluid
+                      multiple
+                      search
+                      selection
+                      closeOnChange
+                      name="tags"
+                      options={tagsOptions}
+                      onChange={this.handleChangeDropDown}
+                    />
+                  </Form.Group>
+                  <Form.Button style={{ margin: '10px' }}
                   >Enregistrer
                   <Icon name='right arrow' />
                   </Form.Button>
