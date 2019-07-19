@@ -45,13 +45,17 @@ class FormAddContent extends Component {
       type: this.state.type,
       tags: this.state.tags
     };
-    console.log(formData)
     axios.post('/api/content/', formData)
       .then(res => {
-        console.log(res);
         console.log(res.data);
       })
 
+  }
+
+  handleAddition = (e, { value }) => {
+    this.setState(prevState => ({
+      tagsList: [{ text: value, value }, ...prevState.tagsList],
+    }))
   }
 
   handleChangeDropDown = (e, { name, value }) => this.setState({ [name]: value })
@@ -124,6 +128,8 @@ class FormAddContent extends Component {
                       search
                       selection
                       closeOnChange
+                      allowAdditions
+                      onAddItem={this.handleAddition}
                       name="tags"
                       options={tagsOptions}
                       onChange={this.handleChangeDropDown}
