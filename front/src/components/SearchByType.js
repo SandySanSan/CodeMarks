@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Container, Grid } from 'semantic-ui-react';
 import axios from 'axios';
 import SideBar from './SideBar';
-import TypesContainer from './TypesContainer';
+import SearchContainer from './SearchContainer';
 
 
 class SearchByType extends Component {
@@ -12,7 +12,6 @@ class SearchByType extends Component {
       searchTypeContent: []
     };
   }
-
 
   componentDidMount() {
     this.getTypes()
@@ -49,9 +48,9 @@ class SearchByType extends Component {
             <Grid.Column width={12}>
               <Container>
                 <Grid centered>
-                  <TypesContainer
-                    searchTypeContent={searchTypeContent}
-                    type={type}
+                  <SearchContainer
+                    content={searchTypeContent}
+                    clef={type}
                   />
                 </Grid>
               </Container>
