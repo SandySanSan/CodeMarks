@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Container, Grid } from 'semantic-ui-react';
 import axios from 'axios';
 import SideBar from './SideBar';
-import TagsContainer from './TagsContainer';
+import SearchContainer from './SearchContainer';
 
 
 class SearchByTags extends Component {
@@ -12,7 +12,6 @@ class SearchByTags extends Component {
       searchTagContent: []
     };
   }
-
 
   componentDidMount() {
     this.getTags()
@@ -53,9 +52,9 @@ class SearchByTags extends Component {
             <Grid.Column width={12}>
               <Container>
                 <Grid centered>
-                  <TagsContainer
-                    searchTagContent={searchTagContent}
-                    tag={tag}
+                  <SearchContainer
+                    content={searchTagContent}
+                    clef={tag}
                   />
                 </Grid>
               </Container>

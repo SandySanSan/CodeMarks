@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Grid, Header, Container } from 'semantic-ui-react';
 import CardContent from './cards/CardContent';
 
-const TypesContainer = ({ searchTypeContent, type }) => {
+const TagsContainer = ({ content, clef }) => {
   return (
     <Fragment>
 
@@ -10,11 +10,11 @@ const TypesContainer = ({ searchTypeContent, type }) => {
         <Grid.Row>
           <Container text>
             <Header as="h3" style={{ marginTop: '40px' }}>
-              Résultats de recherche par type ({type})
+              Résultats de recherche pour : {clef}
             </Header>
           </Container>
         </Grid.Row>
-        {searchTypeContent.map(c => (
+        {content.map(c => (
           <Grid.Column width={7}>
             <CardContent
               key={`${c.title}-${c.idcontent}`}
@@ -31,4 +31,4 @@ const TypesContainer = ({ searchTypeContent, type }) => {
     </Fragment>
   );
 };
-export default TypesContainer;
+export default TagsContainer;
