@@ -15,7 +15,7 @@ function App() {
         <Route exact path="/" component={Home} />
         <Route exact path="/editor" component={EditorContainer} />
         <Route exact path="/add-content" component={FormAddContent} />
-        <Route exact path="/search-by-tags" component={SearchByTags} />
+        <Route exact path="/search-by-tags/:tag" component={SearchByTags} />
 
       </div>
     </BrowserRouter>

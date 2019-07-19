@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Container, Grid } from 'semantic-ui-react';
 import axios from 'axios';
 import SideBar from './SideBar';
-import TagsContainer from './cards/CardsContainer';
+import TagsContainer from './TagsContainer';
 
 
 class SearchByTags extends Component {
@@ -15,7 +15,7 @@ class SearchByTags extends Component {
 
 
   componentDidMount() {
-    const { tag } = this.props.location.tag;
+    const { tag } = this.props.match.params;
     console.log(tag)
     axios.get(`/api/tags/${tag}`)
       .then(resp => this.setState({ searchTagContent: resp.data }));

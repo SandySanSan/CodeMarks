@@ -25,6 +25,27 @@ const CardsContainer = ({ content }) => {
           </Grid.Column>
         </Grid.Row>
       </Grid>
+      <Grid.Row>
+        <Container text>
+          <Header as="h3" dividing>
+            <Icon name="js square" color="yellow" />
+            Javascript
+          </Header>
+        </Container>
+      </Grid.Row>
+      {contentJs.splice(0, 4).map(c => (
+        <Grid.Column
+          width={7}
+          key={`${c.title}-${c.idcontent}`}
+        >
+          <CardContent
+            link={c.link}
+            tags={c.tagsNames}
+            id={c.idcontent}
+            title={c.title}
+          />
+        </Grid.Column>
+      ))}
       <Grid centered>
         <Grid.Row style={{ marginTop: '45px' }}>
           <Container text>
@@ -44,27 +65,7 @@ const CardsContainer = ({ content }) => {
           </Grid.Column>
         ))}
 
-        <Grid.Row>
-          <Container text>
-            <Header as="h3" dividing>
-              <Icon name="js square" color="yellow" />
-              Javascript
-            </Header>
-          </Container>
-        </Grid.Row>
-        {contentJs.splice(0, 4).map(c => (
-          <Grid.Column
-            width={7}
-            key={`${c.title}-${c.idcontent}`}
-          >
-            <CardContent
-              link={c.link}
-              tags={c.tagsNames}
-              id={c.idcontent}
-              title={c.title}
-            />
-          </Grid.Column>
-        ))}
+
 
       </Grid>
     </Fragment>
