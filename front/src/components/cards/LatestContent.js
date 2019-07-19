@@ -4,8 +4,7 @@ import ListLatestContent from './ListLatestContent';
 
 
 const LatestContent = ({ content }) => {
-  const newestContent = content.sort((a, b) => new Date(b.dateCreation) - new Date(a.dateCreation));
-  const lastest = newestContent.splice(0, 3);
+  const lastest = content.splice(0, 3);
 
   return (
     <Fragment>

@@ -115,7 +115,8 @@ class FormAddContent extends Component {
                     />
 
                   </Form.Group>
-                  <Form.Group>
+                  <Form.Field>
+                    <label>Tags</label>
                     <Dropdown
                       placeholder='Tags'
                       fluid
@@ -127,7 +128,7 @@ class FormAddContent extends Component {
                       options={tagsOptions}
                       onChange={this.handleChangeDropDown}
                     />
-                  </Form.Group>
+                  </Form.Field>
                   <Form.Button style={{ margin: '10px' }}
                   >Enregistrer
                   <Icon name='right arrow' />

@@ -1,37 +1,57 @@
 import React, { Component } from 'react';
 import { Menu, Button, Icon } from 'semantic-ui-react';
+import { withRouter } from "react-router-dom";
 
-export default class MenuExampleHeader extends Component {
+
+class Navbar extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.handleItemClick = this.handleItemClick.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
-  handleItemClick(e, { name }) {
-    this.setState({ activeItem: name });
-  }
+  // handleItemClick(e, { name }) {
+  // }
 
+  handleClick = (event, data) => {
+    const type = data.value;
+    // console.log(e.target.name)
+    const { history } = this.props;
+    history.push(`/search-by-types/${type}`);
+
+  }
 
   render() {
     const { activeItem } = this.state;
 
     return (
       <Menu inverted>
-        <Menu.Item header style={{ color: 'limegreen' }}><Icon name="code" color='green' />CodeMarks</Menu.Item>
         <Menu.Item
-          name="Accueil"
-          active={activeItem === 'Accueil'}
-          onClick={this.handleItemClick}
-          color="pink"
-          href="/"
-        />
+          header
+          style={{ color: 'limegreen' }}
+          href="/">
+          <Icon name="code" color='green' />
+          CodeMarks
+        </Menu.Item>
         <Menu.Item
+          value="article"
           name="Articles"
           active={activeItem === 'Articles'}
-          onClick={this.handleItemClick}
+          onClick={this.handleClick}
+
         />
-        <Menu.Item name="Videos" active={activeItem === 'Videos'} onClick={this.handleItemClick} />
+        {/* <Button
+          size='mini'
+          basic
+          value="article"
+          onClick={(e) => this.handleClick(e)}
+        >Articles
+                </Button> */}
+        <Menu.Item
+          value="video"
+          name="Vidéos"
+          active={activeItem === 'Videos'}
+          onClick={this.handleClick} />
         <Menu.Item
           name="Notes"
           active={activeItem === 'Notes'}
@@ -47,3 +67,5 @@ export default class MenuExampleHeader extends Component {
     );
   }
 };
+
+export default withRouter(Navbar);
