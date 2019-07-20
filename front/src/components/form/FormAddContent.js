@@ -45,10 +45,9 @@ class FormAddContent extends Component {
       type: this.state.type,
       tags: this.state.tags
     };
-    console.log(formData)
+
     axios.post('/api/content/', formData)
       .then(res => {
-        console.log(res);
         console.log(res.data);
       })
 

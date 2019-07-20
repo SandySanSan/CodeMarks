@@ -14,7 +14,7 @@ function App() {
       <div>
         <Navbar />
         <Route exact path="/" component={Home} />
-        <Route exact path="/editor" component={EditorContainer} />
+        <Route exact path="/editor/:id" component={EditorContainer} />
         <Route exact path="/add-content" component={FormAddContent} />
         <Route exact path="/search-by-tags/:tag" component={SearchByTags} />
         <Route exact path="/search-by-types/:type" component={SearchByType} />
