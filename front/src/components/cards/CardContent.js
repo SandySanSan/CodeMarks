@@ -25,10 +25,9 @@ const CardContent = ({ link, id, title }) => (
       <Card.Content extra>
         <Button.Group basic size="small">
           <Link to={{
-            pathname: '/editor',
-            id: { id },
-            title: { title },
-            link: { link }
+            pathname: `/editor/${id}`,
+            link: { link },
+            id: { id }
           }}
           >
             <Button icon="write" />

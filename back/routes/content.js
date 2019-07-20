@@ -44,6 +44,23 @@ router.get('/:id', (req, res) => {
   });
 });
 
+router.put('/add-note/:id', (req, res) => {
+  const formData = req.body;
+  const { note } = formData
+  const contentId = req.params.id;
+  db.query('UPDATE content SET note=? WHERE idcontent= ?', [note, contentId], (err, results) => {
+
+    if (err) {
+      return res.status(500).json({
+        error: err.message,
+        sql: err.sql
+      });
+    }
+    return res.status(200).json(results);
+
+  });
+});
+
 router.get('/type/:type', (req, res) => {
   const typeSelect = req.params.type;
   db.query('SELECT * FROM content WHERE type LIKE ? ORDER BY dateCreation DESC', typeSelect, (err, results) => {
