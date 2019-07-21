@@ -1,11 +1,16 @@
 import React, { Component, Fragment } from 'react';
+import { withRouter } from "react-router-dom";
 import axios from 'axios';
 import { Container, Grid, Button as ButtonSem } from 'semantic-ui-react';
 import { Editor } from 'slate-react';
 import { Value } from 'slate';
 import Iframe from './iframe.js';
-import { isKeyHotkey } from 'is-hotkey'
-import { Button, Icon, Toolbar } from './components'
+import { isKeyHotkey } from 'is-hotkey';
+import { Button, Icon, Toolbar } from './components';
+import Noty from 'noty';
+import "../../../node_modules/noty/lib/noty.css";
+import "../../../node_modules/noty/lib/themes/metroui.css"
+
 
 
 const DEFAULT_NODE = 'paragraph'
@@ -14,6 +19,7 @@ const isBoldHotkey = isKeyHotkey('mod+b')
 const isItalicHotkey = isKeyHotkey('mod+i')
 const isUnderlinedHotkey = isKeyHotkey('mod+u')
 const isCodeHotkey = isKeyHotkey('mod+`')
+
 
 const initialValue = Value.fromJSON({
   document: {
@@ -33,12 +39,13 @@ const initialValue = Value.fromJSON({
 });
 
 
-
 class EditorContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // contentEdit: []
+      title: '',
+      id: this.props.match.params.id,
+      note: '',
       value: initialValue
     };
   }
@@ -62,34 +69,43 @@ class EditorContainer extends Component {
   }
 
   submitNote = () => {
-    const { id } = this.props.location.id;
-    const { value } = this.state;
+    const { value, id } = this.state;
     const note = JSON.stringify(value.toJSON())
 
     axios.put(`/api/content/add-note/${id}`, { note })
+    new Noty({
+      text: "CONFIRMATION La note a été correctement enregistrée!",
+      theme: "metroui",
+      type: "success",
+      layout: 'topCenter',
+      timeout: '2000',
+    }).show();
+
+    const { history } = this.props;
+
+    setTimeout(function () {
+      history.push('/');
+    }, 1000);
+
   }
 
-  // onChange = ({ value }) => {
-  //   // Check to see if the document has changed before saving.
-  //   if (value.document != this.state.value.document) {
-  //     const content = JSON.stringify(value.toJSON())
-  //     localStorage.setItem('content', content)
-  //   }
+  componentDidMount() {
+    // const { id } = this.props.history.location.id;
+    const { id } = this.state;
 
-  //   this.setState({ value })
-  // }
-
-
-  // componentDidMount() {
-  //   const { id } = this.props.location.id;
-  //   console.log(id)
-  //   axios.get(`/api/content/${id}`)
-  //     .then(resp => this.setState({ contentEdit: resp.data }));
-  // }
+    axios.get(`/api/content/${id}`)
+      .then(resp => this.setState({
+        idcontent: resp.data[0].idcontent,
+        title: resp.data[0].title,
+        link: resp.data[0].link,
+        note: resp.data[0].note
+      }));
+  }
 
   render() {
-    const { link } = this.props.location.link;
-    const { value } = this.state;
+
+    const { value, link, id } = this.state;
+    console.log(id)
     return (
       <Fragment>
         <Container fluid style={{ padding: '25px' }}>
@@ -298,4 +314,4 @@ class EditorContainer extends Component {
   }
 }
 
-export default EditorContainer;
+export default withRouter(EditorContainer);

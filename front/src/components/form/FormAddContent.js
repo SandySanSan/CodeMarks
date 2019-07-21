@@ -1,6 +1,11 @@
 import React, { Component, Fragment } from 'react';
+import { withRouter } from "react-router-dom";
 import axios from 'axios';
 import { Form, Container, Grid, Icon, Header, Segment, Dropdown } from 'semantic-ui-react'
+import Noty from 'noty';
+import "../../../node_modules/noty/lib/noty.css";
+import "../../../node_modules/noty/lib/themes/metroui.css"
+
 
 
 class FormAddContent extends Component {
@@ -50,7 +55,19 @@ class FormAddContent extends Component {
       .then(res => {
         console.log(res.data);
       })
+    new Noty({
+      text: "CONFIRMATION Le lien a été correctement enregistré!",
+      theme: "metroui",
+      type: "success",
+      layout: 'topCenter',
+      timeout: '2000',
+    }).show();
 
+    const { history } = this.props;
+
+    setTimeout(function () {
+      history.push('/');
+    }, 1000);
   }
 
   handleChangeDropDown = (e, { name, value }) => this.setState({ [name]: value })
@@ -143,4 +160,4 @@ class FormAddContent extends Component {
   }
 }
 
-export default FormAddContent;
+export default withRouter(FormAddContent);

@@ -1,13 +1,14 @@
 
 import React from 'react';
+import { withRouter } from "react-router-dom";
+
 import ReactTinyLink from 'react-tiny-link';
 import { Link } from 'react-router-dom';
 import {
   Card, Button
-  // Label
 } from 'semantic-ui-react';
 
-const CardContent = ({ link, id, title }) => (
+const CardContent = ({ link, id, title, note }) => (
   <div>
     <Card
       fluid
@@ -26,13 +27,18 @@ const CardContent = ({ link, id, title }) => (
         <Button.Group basic size="small">
           <Link to={{
             pathname: `/editor/${id}`,
-            link: { link },
-            id: { id }
           }}
           >
             <Button icon="write" />
           </Link>
-          <Button icon="eye" />
+          {note !== null ? (
+            <Link to={{
+              pathname: `/display-note/${id}`,
+            }}
+            >
+              <Button icon="eye" />
+            </Link>
+          ) : ''}
           <Button icon="delete" />
         </Button.Group>
       </Card.Content>
@@ -41,4 +47,4 @@ const CardContent = ({ link, id, title }) => (
 
 );
 
-export default CardContent;
+export default withRouter(CardContent);

@@ -10,8 +10,6 @@ class Navbar extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  // handleItemClick(e, { name }) {
-  // }
 
   handleClick = (event, data) => {
     const type = data.value;
@@ -38,15 +36,8 @@ class Navbar extends Component {
           name="Articles"
           active={activeItem === 'Articles'}
           onClick={this.handleClick}
-
         />
-        {/* <Button
-          size='mini'
-          basic
-          value="article"
-          onClick={(e) => this.handleClick(e)}
-        >Articles
-                </Button> */}
+
         <Menu.Item
           value="video"
           name="Vidéos"

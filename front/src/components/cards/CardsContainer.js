@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { withRouter } from 'react-router-dom';
 import { Grid, Header, Icon, Container } from 'semantic-ui-react';
 import CardContent from './CardContent';
 import LatestContent from './LatestContent';
@@ -40,9 +41,9 @@ const CardsContainer = ({ content }) => {
         >
           <CardContent
             link={c.link}
-            tags={c.tagsNames}
             id={c.idcontent}
             title={c.title}
+            note={c.note}
           />
         </Grid.Column>
       ))}
@@ -61,6 +62,7 @@ const CardsContainer = ({ content }) => {
               link={c.link}
               id={c.idcontent}
               title={c.title}
+              note={c.note}
             />
           </Grid.Column>
         ))}
@@ -71,4 +73,4 @@ const CardsContainer = ({ content }) => {
     </Fragment>
   );
 };
-export default CardsContainer;
+export default withRouter(CardsContainer);
