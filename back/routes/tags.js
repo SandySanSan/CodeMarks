@@ -35,7 +35,8 @@ router.get('/:tag', (req, res) => {
   db.query(`SELECT *, tagName FROM content 
   JOIN contentHasTag ON contentHasTag.contentId = content.idcontent 
   JOIN tag ON idtag = tagId 
-  WHERE tagName LIKE ?`, tagSelect, (err, results) => {
+  WHERE tagName LIKE ?
+  ORDER BY dateCreation DESC`, tagSelect, (err, results) => {
 
       if (err) {
         return res.status(500).json({

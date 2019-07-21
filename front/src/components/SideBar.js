@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Dropdown, Icon, Input, Menu, Button } from 'semantic-ui-react';
+import { Icon, Input, Menu, Button } from 'semantic-ui-react';
 import { withRouter } from "react-router-dom";
 
 class SideBar extends Component {
@@ -38,7 +38,7 @@ class SideBar extends Component {
             <Menu.Item>
               {tags.map(tag =>
                 <Button
-                  size='mini'
+                  compact
                   basic color={tag.color}
                   style={{ margin: '3px' }}
                   key={`${tag.color}-${tag.idtag}`}
@@ -53,23 +53,8 @@ class SideBar extends Component {
 
         <Menu.Item name='browse' active={activeItem === 'browse'} onClick={this.handleItemClick}>
           <Icon name='grid layout' />
-          Browse
+          Parcourir tous les liens
         </Menu.Item>
-        <Menu.Item
-          name='messages'
-          active={activeItem === 'messages'}
-          onClick={this.handleItemClick}
-        >
-          Messages
-        </Menu.Item>
-
-        <Dropdown item text='More'>
-          <Dropdown.Menu>
-            <Dropdown.Item icon='edit' text='Edit Profile' />
-            <Dropdown.Item icon='globe' text='Choose Language' />
-            <Dropdown.Item icon='settings' text='Account Settings' />
-          </Dropdown.Menu>
-        </Dropdown>
       </Menu>
     )
   }

@@ -1,21 +1,20 @@
 import React, { Fragment } from 'react';
-import { Grid, Header, Icon, Container } from 'semantic-ui-react';
+import { Grid, Header, Container } from 'semantic-ui-react';
 import CardContent from './cards/CardContent';
 
-const TagsContainer = ({ searchTagContent }) => {
+const TagsContainer = ({ content, clef }) => {
   return (
     <Fragment>
 
       <Grid centered>
         <Grid.Row>
           <Container text>
-            <Header as="h3" dividing>
-              <Icon name="js square" color="yellow" />
-              Javascript
-              </Header>
+            <Header as="h3" style={{ marginTop: '40px' }}>
+              Résultats de recherche pour : {clef}
+            </Header>
           </Container>
         </Grid.Row>
-        {searchTagContent.map(c => (
+        {content.map(c => (
           <Grid.Column width={7}>
             <CardContent
               key={`${c.title}-${c.idcontent}`}

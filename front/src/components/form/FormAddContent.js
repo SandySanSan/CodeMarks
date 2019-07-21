@@ -1,6 +1,11 @@
 import React, { Component, Fragment } from 'react';
+import { withRouter } from "react-router-dom";
 import axios from 'axios';
 import { Form, Container, Grid, Icon, Header, Segment, Dropdown } from 'semantic-ui-react'
+import Noty from 'noty';
+import "../../../node_modules/noty/lib/noty.css";
+import "../../../node_modules/noty/lib/themes/metroui.css"
+
 
 
 class FormAddContent extends Component {
@@ -45,13 +50,21 @@ class FormAddContent extends Component {
       type: this.state.type,
       tags: this.state.tags
     };
-    console.log(formData)
+
     axios.post('/api/content/', formData)
       .then(res => {
-        console.log(res);
         console.log(res.data);
       })
+    new Noty({
+      text: "CONFIRMATION Le lien a été correctement snregistré!",
+      theme: "metroui",
+      type: "success",
+      layout: 'topCenter',
+      timeout: '2000',
+    }).show();
 
+    const { history } = this.props;
+    history.push('/');
   }
 
   handleChangeDropDown = (e, { name, value }) => this.setState({ [name]: value })
@@ -115,7 +128,8 @@ class FormAddContent extends Component {
                     />
 
                   </Form.Group>
-                  <Form.Group>
+                  <Form.Field>
+                    <label>Tags</label>
                     <Dropdown
                       placeholder='Tags'
                       fluid
@@ -127,7 +141,7 @@ class FormAddContent extends Component {
                       options={tagsOptions}
                       onChange={this.handleChangeDropDown}
                     />
-                  </Form.Group>
+                  </Form.Field>
                   <Form.Button style={{ margin: '10px' }}
                   >Enregistrer
                   <Icon name='right arrow' />
@@ -143,4 +157,4 @@ class FormAddContent extends Component {
   }
 }
 
-export default FormAddContent;
+export default withRouter(FormAddContent);

@@ -44,6 +44,38 @@ router.get('/:id', (req, res) => {
   });
 });
 
+router.put('/add-note/:id', (req, res) => {
+  const note = req.body;
+  // const { note } = formData
+  const contentId = req.params.id;
+  db.query('UPDATE content SET ? WHERE idcontent= ?', [note, contentId], (err, results) => {
+
+    if (err) {
+      return res.status(500).json({
+        error: err.message,
+        sql: err.sql
+      });
+    }
+    return res.status(200).json(results);
+
+  });
+});
+
+router.get('/type/:type', (req, res) => {
+  const typeSelect = req.params.type;
+  db.query('SELECT * FROM content WHERE type LIKE ? ORDER BY dateCreation DESC', typeSelect, (err, results) => {
+
+    if (err) {
+      return res.status(500).json({
+        error: err.message,
+        sql: err.sql
+      });
+    }
+    return res.status(200).json(results);
+
+  });
+});
+
 
 
 
@@ -51,7 +83,8 @@ router.get('/', (req, res) => {
   db.query(`SELECT *, tagName 
   FROM content 
   JOIN contentHasTag ON contentHasTag.contentId = content.idcontent 
-  JOIN tag ON idtag = tagId`, (err, results) => {
+  JOIN tag ON idtag = tagId
+  ORDER BY dateCreation DESC`, (err, results) => {
       const dedup = (items) => items.reduce((carry, current) => {
         const existing = carry.find(item => item.idcontent === current.idcontent);
         if (!existing) {
