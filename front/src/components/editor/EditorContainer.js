@@ -64,13 +64,9 @@ class EditorContainer extends Component {
   submitNote = () => {
     const { id } = this.props.location.id;
     const { value } = this.state;
-    // const formData = value.toJSON()
     const note = JSON.stringify(value.toJSON())
 
     axios.put(`/api/content/add-note/${id}`, { note })
-    // .then(res => {
-    //   console.log(res.data);
-    // })
   }
 
   // onChange = ({ value }) => {
