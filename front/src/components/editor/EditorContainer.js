@@ -1,11 +1,16 @@
 import React, { Component, Fragment } from 'react';
+import { withRouter } from "react-router-dom";
 import axios from 'axios';
 import { Container, Grid, Button as ButtonSem } from 'semantic-ui-react';
 import { Editor } from 'slate-react';
 import { Value } from 'slate';
 import Iframe from './iframe.js';
-import { isKeyHotkey } from 'is-hotkey'
-import { Button, Icon, Toolbar } from './components'
+import { isKeyHotkey } from 'is-hotkey';
+import { Button, Icon, Toolbar } from './components';
+import Noty from 'noty';
+import "../../../node_modules/noty/lib/noty.css";
+import "../../../node_modules/noty/lib/themes/metroui.css"
+
 
 
 const DEFAULT_NODE = 'paragraph'
@@ -67,18 +72,17 @@ class EditorContainer extends Component {
     const note = JSON.stringify(value.toJSON())
 
     axios.put(`/api/content/add-note/${id}`, { note })
+    new Noty({
+      text: "CONFIRMATION La note a été correctement enregistrée!",
+      theme: "metroui",
+      type: "success",
+      layout: 'topCenter',
+      timeout: '2000',
+    }).show();
+
+    const { history } = this.props;
+    history.push('/');
   }
-
-  // onChange = ({ value }) => {
-  //   // Check to see if the document has changed before saving.
-  //   if (value.document != this.state.value.document) {
-  //     const content = JSON.stringify(value.toJSON())
-  //     localStorage.setItem('content', content)
-  //   }
-
-  //   this.setState({ value })
-  // }
-
 
   // componentDidMount() {
   //   const { id } = this.props.location.id;
@@ -298,4 +302,4 @@ class EditorContainer extends Component {
   }
 }
 
-export default EditorContainer;
+export default withRouter(EditorContainer);

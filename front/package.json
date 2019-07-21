@@ -8,6 +8,7 @@
     "immutable": "^4.0.0-rc.12",
     "is-hotkey": "^0.1.4",
     "material-icons": "^0.3.1",
+    "noty": "^3.2.0-beta",
     "object-assign": "^4.1.1",
     "prismjs": "^1.16.0",
     "react": "^16.8.6",
