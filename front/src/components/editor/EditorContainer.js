@@ -20,6 +20,7 @@ const isItalicHotkey = isKeyHotkey('mod+i')
 const isUnderlinedHotkey = isKeyHotkey('mod+u')
 const isCodeHotkey = isKeyHotkey('mod+`')
 
+
 const initialValue = Value.fromJSON({
   document: {
     nodes: [
@@ -38,12 +39,13 @@ const initialValue = Value.fromJSON({
 });
 
 
-
 class EditorContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // contentEdit: []
+      title: '',
+      id: this.props.match.params.id,
+      note: '',
       value: initialValue
     };
   }
@@ -67,8 +69,7 @@ class EditorContainer extends Component {
   }
 
   submitNote = () => {
-    const { id } = this.props.location.id;
-    const { value } = this.state;
+    const { value, id } = this.state;
     const note = JSON.stringify(value.toJSON())
 
     axios.put(`/api/content/add-note/${id}`, { note })
@@ -81,19 +82,30 @@ class EditorContainer extends Component {
     }).show();
 
     const { history } = this.props;
-    history.push('/');
+
+    setTimeout(function () {
+      history.push('/');
+    }, 1000);
+
   }
 
-  // componentDidMount() {
-  //   const { id } = this.props.location.id;
-  //   console.log(id)
-  //   axios.get(`/api/content/${id}`)
-  //     .then(resp => this.setState({ contentEdit: resp.data }));
-  // }
+  componentDidMount() {
+    // const { id } = this.props.history.location.id;
+    const { id } = this.state;
+
+    axios.get(`/api/content/${id}`)
+      .then(resp => this.setState({
+        idcontent: resp.data[0].idcontent,
+        title: resp.data[0].title,
+        link: resp.data[0].link,
+        note: resp.data[0].note
+      }));
+  }
 
   render() {
-    const { link } = this.props.location.link;
-    const { value } = this.state;
+
+    const { value, link, id } = this.state;
+    console.log(id)
     return (
       <Fragment>
         <Container fluid style={{ padding: '25px' }}>

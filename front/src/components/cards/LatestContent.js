@@ -17,6 +17,7 @@ const LatestContent = ({ content }) => {
             id={el.idcontent}
             link={el.link}
             dateCreation={el.dateCreation}
+            note={el.note}
           />
         ))}
       </List>
