@@ -25,7 +25,7 @@ class Navbar extends Component {
     const { activeItem } = this.state;
 
     return (
-      <Menu inverted>
+      <Menu inverted size='large'>
         <Menu.Item
           header
           style={{ color: 'limegreen' }}

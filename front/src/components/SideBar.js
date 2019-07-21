@@ -38,7 +38,7 @@ class SideBar extends Component {
             <Menu.Item>
               {tags.map(tag =>
                 <Button
-                  size='mini'
+                  compact
                   basic color={tag.color}
                   style={{ margin: '3px' }}
                   key={`${tag.color}-${tag.idtag}`}

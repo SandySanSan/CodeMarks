@@ -45,10 +45,10 @@ router.get('/:id', (req, res) => {
 });
 
 router.put('/add-note/:id', (req, res) => {
-  const formData = req.body;
-  const { note } = formData
+  const note = req.body;
+  // const { note } = formData
   const contentId = req.params.id;
-  db.query('UPDATE content SET note=? WHERE idcontent= ?', [note, contentId], (err, results) => {
+  db.query('UPDATE content SET ? WHERE idcontent= ?', [note, contentId], (err, results) => {
 
     if (err) {
       return res.status(500).json({

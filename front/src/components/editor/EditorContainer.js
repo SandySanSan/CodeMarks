@@ -65,9 +65,9 @@ class EditorContainer extends Component {
     const { id } = this.props.location.id;
     const { value } = this.state;
     // const formData = value.toJSON()
-    const formData = JSON.stringify(value.toJSON())
+    const note = JSON.stringify(value.toJSON())
 
-    axios.put(`/api/content/add-note/${id}`, { formData })
+    axios.put(`/api/content/add-note/${id}`, { note })
     // .then(res => {
     //   console.log(res.data);
     // })

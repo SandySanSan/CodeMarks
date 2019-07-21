@@ -5,8 +5,8 @@ const contentRouter = require('./routes/content');
 const tagsRouter = require('./routes/tags')
 
 const app = express();
+app.use(express.json());
 app.use(bodyParser.json());
-
 app.use('/api/content', contentRouter);
 app.use('/api/tags', tagsRouter);
 
