@@ -56,7 +56,7 @@ class FormAddContent extends Component {
         console.log(res.data);
       })
     new Noty({
-      text: "CONFIRMATION Le lien a été correctement snregistré!",
+      text: "CONFIRMATION Le lien a été correctement enregistré!",
       theme: "metroui",
       type: "success",
       layout: 'topCenter',
@@ -64,7 +64,10 @@ class FormAddContent extends Component {
     }).show();
 
     const { history } = this.props;
-    history.push('/');
+
+    setTimeout(function () {
+      history.push('/');
+    }, 1000);
   }
 
   handleChangeDropDown = (e, { name, value }) => this.setState({ [name]: value })

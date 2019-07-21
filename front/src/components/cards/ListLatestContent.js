@@ -2,22 +2,25 @@ import React, { Fragment } from 'react';
 import { List, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
-const ListLatestContent = ({ id, link, title, type, dateCreation }) => (
+const ListLatestContent = ({ id, link, title, type, dateCreation, note }) => (
   <Fragment>
     <List.Item>
       <List.Content floated="right">
         <Button.Group basic size="small">
           <Link to={{
-            pathname: '/editor',
-            id: { id },
-            title: { title },
-            link: { link }
-
+            pathname: `/editor/${id}`,
           }}
           >
             <Button icon="write" />
           </Link>
-          <Button icon="eye" />
+          {note !== null ? (
+            <Link to={{
+              pathname: `/display-note/${id}`,
+            }}
+            >
+              <Button icon="eye" />
+            </Link>
+          ) : ''}
           <Button icon="delete" />
         </Button.Group>
       </List.Content>
@@ -27,7 +30,7 @@ const ListLatestContent = ({ id, link, title, type, dateCreation }) => (
         <List.Description as="a">Ajouté le {dateCreation}</List.Description>
       </List.Content>
     </List.Item>
-  </Fragment>
+  </Fragment >
 );
 
 export default ListLatestContent;
