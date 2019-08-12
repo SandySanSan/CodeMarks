@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { withRouter } from "react-router-dom";
 import axios from 'axios';
 import { Container, Grid, Button as ButtonSem } from 'semantic-ui-react';
 import Iframe from './iframe.js';
@@ -27,25 +28,34 @@ class EditorContainer extends Component {
     const note = JSON.stringify(editorState.toJSON())
 
     axios.put(`/api/content/add-note/${id}`, { note })
+    new Noty({
+      text: "CONFIRMATION La note a été correctement enregistrée!",
+      theme: "metroui",
+      type: "success",
+      layout: 'topCenter',
+      timeout: '2000',
+    }).show();
+
+    const { history } = this.props;
+
+    setTimeout(function () {
+      history.push('/');
+    }, 1000);
+
   }
 
-  // onChange = ({ value }) => {
-  //   // Check to see if the document has changed before saving.
-  //   if (value.document != this.state.value.document) {
-  //     const content = JSON.stringify(value.toJSON())
-  //     localStorage.setItem('content', content)
-  //   }
+  componentDidMount() {
+    // const { id } = this.props.history.location.id;
+    const { id } = this.state;
 
-  //   this.setState({ value })
-  // }
-
-
-  // componentDidMount() {
-  //   const { id } = this.props.location.id;
-  //   console.log(id)
-  //   axios.get(`/api/content/${id}`)
-  //     .then(resp => this.setState({ contentEdit: resp.data }));
-  // }
+    axios.get(`/api/content/${id}`)
+      .then(resp => this.setState({
+        idcontent: resp.data[0].idcontent,
+        title: resp.data[0].title,
+        link: resp.data[0].link,
+        note: resp.data[0].note
+      }));
+  }
 
   render() {
     const { link } = this.props.location.link;
@@ -84,4 +94,4 @@ class EditorContainer extends Component {
   }
 }
 
-export default EditorContainer;
+export default withRouter(EditorContainer);
