@@ -24,5 +24,8 @@
     "hooks": {
       "pre-commit": "npx lerna run --concurrency 1 --stream precommit"
     }
+  },
+  "dependencies": {
+    "draftjs-to-html": "^0.8.4"
   }
 }
