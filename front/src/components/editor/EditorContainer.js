@@ -6,11 +6,18 @@ import Iframe from './iframe.js';
 import { EditorState, convertToRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import Noty from 'noty';
+import "../../../node_modules/noty/lib/noty.css";
+import "../../../node_modules/noty/lib/themes/metroui.css";
 
 class EditorContainer extends Component {
-  state = {
+  constructor(props){
+    super(props);
+  this.state = {
     editorState: EditorState.createEmpty(),
+    id: this.props.match.params.id,
   }
+}
 
   onEditorStateChange = (editorState) => {
     this.setState({
@@ -18,15 +25,12 @@ class EditorContainer extends Component {
     });
   };
 
-  onChange = ({ value }) => {
-    this.setState({ value })
-  }
 
   submitNote = () => {
-    const { id } = this.props.location.id;
-    const { editorState } = this.state;
-    const note = JSON.stringify(editorState.toJSON())
-
+    const { editorState, id } = this.state;
+    const contentState = editorState.getCurrentContent();
+    const note = JSON.stringify(convertToRaw(contentState));
+console.log(note)
     axios.put(`/api/content/add-note/${id}`, { note })
     new Noty({
       text: "CONFIRMATION La note a été correctement enregistrée!",
@@ -58,8 +62,7 @@ class EditorContainer extends Component {
   }
 
   render() {
-    const { link } = this.props.location.link;
-    const { editorState } = this.state;
+    const { editorState, link } = this.state;
     return (
       <Fragment>
         <Container fluid style={{ padding: '25px' }}>
@@ -80,7 +83,7 @@ class EditorContainer extends Component {
                 url={link}
                 width="100%"
                 height="100%"
-                scrolling
+                scrolling="true"
                 display="initial"
                 position="relative"
               />
