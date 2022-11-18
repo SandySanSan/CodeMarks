@@ -16,7 +16,7 @@
     "react-dom": "^16.8.6",
     "react-iframe": "^1.8.0",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "3.0.1",
+    "react-scripts": "5.0.1",
     "react-tiny-link": "^1.0.2",
     "semantic-ui-react": "^0.87.3",
     "slate": "^0.47.4",
